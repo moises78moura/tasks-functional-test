@@ -40,7 +40,6 @@ public class TaskTest {
 			driver.quit();
 		}
 		
-		
 	}
 	
 	@Test
@@ -69,7 +68,6 @@ public class TaskTest {
 		}finally {
 			driver.quit();
 		}
-		
 		
 	}
 	
@@ -100,7 +98,6 @@ public class TaskTest {
 			driver.quit();
 		}
 		
-		
 	}
 	
 	@Test
@@ -122,14 +119,12 @@ public class TaskTest {
 			
 			//Validar mensagem de sucesso
 			String mensagem = driver.findElement(By.id("message")).getText();
-			
 			assertEquals("Fill the task description", mensagem);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
-			//driver.quit();
+			driver.quit();
 		}
-		
 		
 	}
 	//Due date must not be in past
