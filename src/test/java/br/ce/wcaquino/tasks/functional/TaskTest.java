@@ -2,19 +2,26 @@ package br.ce.wcaquino.tasks.functional;
 
 import static org.junit.Assert.assertEquals;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.concurrent.TimeUnit;
+
+import javax.crypto.spec.DESedeKeySpec;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class TaskTest {
 
 	
 	@Test
-	public void deveSalvarTarefaComSucesso() {
+	public void deveSalvarTarefaComSucesso() throws MalformedURLException {
 		
 		WebDriver driver = acessarAplicacao();
 		try {
@@ -43,7 +50,7 @@ public class TaskTest {
 	}
 	
 	@Test
-	public void naoDeveSalvarTarefaComDataPassada() {
+	public void naoDeveSalvarTarefaComDataPassada() throws MalformedURLException {
 		
 		WebDriver driver = acessarAplicacao();
 		try {
@@ -72,7 +79,7 @@ public class TaskTest {
 	}
 	
 	@Test
-	public void naoDeveSalvarTarefaSemData() {
+	public void naoDeveSalvarTarefaSemData() throws MalformedURLException {
 		
 		WebDriver driver = acessarAplicacao();
 		try {
@@ -101,7 +108,7 @@ public class TaskTest {
 	}
 	
 	@Test
-	public void naoDeveSalvarTarefaSemDescricao() {
+	public void naoDeveSalvarTarefaSemDescricao() throws MalformedURLException {
 		
 		WebDriver driver = acessarAplicacao();
 		try {
@@ -129,10 +136,17 @@ public class TaskTest {
 	}
 	//Due date must not be in past
 
-	public WebDriver acessarAplicacao() {
-		WebDriver driver = new ChromeDriver();
+	public WebDriver acessarAplicacao() throws MalformedURLException {
+		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+		//		WebDriver driver = new ChromeDriver();
 //		WebDriver driver = new FirefoxDriver();
-		driver.navigate().to("http://localhost:8081/tasks");
+		URL url = null;
+		url = new URL(" http://localhost:4444/wd/hub");
+//		url = new URL(" http://192.168.15.30:4444/wd/hub");
+	
+		WebDriver driver = new RemoteWebDriver(url, capabilities);
+		driver.navigate().to("http://192.168.15.30:8081/tasks");//IP - Local
+//		driver.navigate().to("http://localhost:8081/tasks");
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		return driver;
 	}
