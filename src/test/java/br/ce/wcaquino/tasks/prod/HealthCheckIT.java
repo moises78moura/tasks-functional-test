@@ -18,10 +18,10 @@ public class HealthCheckIT {
 		
 		DesiredCapabilities cap = DesiredCapabilities.chrome();
 		WebDriver driver;
-		driver = new RemoteWebDriver(new URL("http://192.168.15.30:4444/wd/hub"), cap);
+		driver = new RemoteWebDriver(new URL("http://192.168.32.1:4444/wd/hub"), cap);
 //		driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), cap);
 		try {
-			driver.navigate().to("http://192.168.15.30:9999/tasks/");
+			driver.navigate().to("http://192.168.32.1:9999/tasks/");
 			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 			String version = driver.findElement(By.id("version")).getText();
 			Assert.assertTrue(version.startsWith("build"));
