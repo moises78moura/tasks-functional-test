@@ -145,7 +145,7 @@ public class TaskTest {
 //		url = new URL(" http://192.168.15.30:4444/wd/hub");
 	
 		WebDriver driver = new RemoteWebDriver(url, capabilities);
-		driver.navigate().to("http://192.168.32.1:8081/tasks");//IP - Local
+		driver.navigate().to("http://192.168.15.30:8081/tasks");//IP - Local
 //		driver.navigate().to("http://localhost:8081/tasks");
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		return driver;
