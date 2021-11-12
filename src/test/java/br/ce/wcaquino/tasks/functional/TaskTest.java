@@ -12,6 +12,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -136,6 +137,40 @@ public class TaskTest {
 	}
 	//Due date must not be in past
 
+	
+	@Test
+	public void deveRemoverTarefaComSucesso() throws MalformedURLException {
+		
+		WebDriver driver = acessarAplicacao();
+		try {
+			//Clicar em Add Todo
+			driver.findElement(By.id("addTodo")).click();
+			//Escrever a descrição
+			driver.findElement(By.id("task")).sendKeys("Testando via Selenium");
+			//Escrever a data
+			driver.findElement(By.id("dueDate")).sendKeys("21/10/2023");
+			//clicar em salvar
+			driver.findElement(By.id("saveButton")).click();
+			//Validar mensagem de sucesso
+			String mensagem = driver.findElement(By.id("message")).getText();
+			assertEquals("Success!", mensagem);
+			
+			//remover tarefa
+			////a[@class='btn btn-outline-danger btn-sm'] -> X-path
+			driver.findElement(By.xpath("//a[@class='btn btn-outline-danger btn-sm']")).click();
+			mensagem = driver.findElement(By.id("message")).getText();
+			assertEquals("Success!", mensagem);
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			driver.quit();
+		}
+		
+	}
+	
+	
 	public WebDriver acessarAplicacao() throws MalformedURLException {
 		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
 		//		WebDriver driver = new ChromeDriver();
